@@ -27,8 +27,8 @@ python make_links.py --src-directory [SOURCE_DIRECTORY] --dest-directory [DESTIN
 - **--endswith:**  
     A list of file extensions to match files in the source directory. This can be used as an alternative or in addition to the --regexes parameter.  
     *Examples:*  
-    - `".txt"` matches any file with a '.txt' extension.  
-    - `".doc"` matches any file with a '.doc' extension.
+    - `".safetensors"` matches any file with a '.safetensors' extension.  
+    - `".bin"` matches any file with a '.bin' extension.
 
 ## EXAMPLES:
 1. To create symlinks for all files with extensions '.safetensors' and '.bin' from C:\Source to D:\Destination:
