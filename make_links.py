@@ -4,8 +4,12 @@ import subprocess
 import argparse
 
 def create_hard_links(src_directory, dest_directory, regexes=None,endswith=None):
-    regexes = regexes or []
+
+    # lets clean up a little bit
+    regexes = [re.compile(pattern) for pattern in regexes] if regexes else []
     endswith = endswith or []
+    src_directory = src_directory.replace('/','\\')
+    dest_directory = dest_directory.replace('/','\\')
 
     # Ensure the destination directory exists
     if not os.path.exists(dest_directory):
@@ -50,15 +54,8 @@ def main(args):
     parser.add_argument("--endswith", nargs="+", required=False, help="List of endswith patterns to filter files")
 
     args = parser.parse_args(args)
-    src_directory = args.src_directory.replace('/','\\')
-    dest_directory = args.dest_directory.replace('/','\\')
-    # Split the provided filter string into separate regex patterns
-    regexes = None
-    if args.regexes:
-        regexes = [re.compile(pattern) for pattern in args.regexes]
-    endswith =  args.endswith
 
-    create_hard_links(src_directory, dest_directory, regexes, endswith)
+    create_hard_links(args.src_directory, args.dest_directory, args.regexes, args.endswith)
     return ret
 
 if __name__ == "__main__":
